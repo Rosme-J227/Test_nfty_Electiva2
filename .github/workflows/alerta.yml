@@ -30,4 +30,4 @@ jobs:
           curl -H "Title: ❌ Test Falló en main" \
                -H "Priority: high" \
                -d "El test falló después de un push a la rama main. Revisar inmediatamente." \
-               https://ntfy.sh/devops-itla
+               https://ntfy.sh/devops-Tarea
