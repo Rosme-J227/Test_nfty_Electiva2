@@ -1,4 +1,4 @@
-console.log("hola Rosme");
+console.log(" Rosme");
 
 const { execSync } = require("child_process");
 
