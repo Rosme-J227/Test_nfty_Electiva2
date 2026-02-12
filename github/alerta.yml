@@ -1,0 +1,33 @@
+name: Alerta si Test Falla
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Ejecutar test
+        id: ejecutar_test
+        run: |
+          node test.js
+        continue-on-error: true
+
+      - name: Enviar notificación a ntfy si falla
+        if: steps.ejecutar_test.outcome == 'failure'
+        run: |
+          curl -H "Title: ❌ Test Falló en main" \
+               -H "Priority: high" \
+               -d "El test falló después de un push a la rama main. Revisar inmediatamente." \
+               https://ntfy.sh/devops-itla
